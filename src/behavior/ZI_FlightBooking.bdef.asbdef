@@ -1,0 +1,19 @@
+managed implementation in class ZBP_FlightBooking unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_FlightBooking alias FlightBooking
+persistent table zflightbooking
+draft table zflightbooking_d
+lock master total etag LastChangedAt
+{
+  create; update; delete;
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  action ( features : instance ) BookFlight result [1] $self;
+  action ( features : instance ) CancelFlight result [1] $self;
+  validation ValidateFlightDate on save { create; update; }
+  determination SetBookingID on modify { create; }
+  determination SetDefaultStatus on modify { create; }
+}

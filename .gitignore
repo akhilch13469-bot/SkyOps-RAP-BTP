@@ -1,0 +1,11 @@
+# Eclipse ADT workspace files
+.project
+.classpath
+.settings/
+
+# Local transport requests
+*.tr
+
+# OS files
+.DS_Store
+Thumbs.db
